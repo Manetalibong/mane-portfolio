@@ -11,18 +11,23 @@ npm run dev
 
 Open the URL shown in the terminal (usually `http://localhost:5173`). Use hash routes: `#works`, `#about`, `#resume`, `#reviews`, `#contact`.
 
+## Live site
+
+**https://manetalibong.github.io/mane-portfolio/**
+
+Repo: [github.com/Manetalibong/mane-portfolio](https://github.com/Manetalibong/mane-portfolio)
+
+(This project is separate from [Manetalibong/Portfolio](https://github.com/Manetalibong/Portfolio), which powers [manetalibong.com](https://manetalibong.com/).)
+
 ## GitHub Pages deploy
 
-1. Create a GitHub repo named `portfolio` (or change `base` in `vite.config.ts` to match your repo name).
-2. Update `homepage` in `package.json` to `https://<your-username>.github.io/portfolio`.
-3. If the repo is **not** named `portfolio`, set `base: '/your-repo-name/'` in `vite.config.ts`.
-4. For a **user site** (`username.github.io` repo), set `base: '/'` in `vite.config.ts`.
+`vite.config.ts` uses `base: '/mane-portfolio/'` to match the repo name. After changes:
 
 ```bash
 npm run deploy
 ```
 
-In GitHub: **Settings → Pages → Source**: deploy from the `gh-pages` branch.
+Pages source: **gh-pages** branch, root `/`.
 
 ## Customize content
 
