@@ -1,0 +1,151 @@
+@import 'tailwindcss';
+
+/* Monochrome “this is me” palette — toggled via html[data-theme] */
+html {
+  --studio-bg: #0a0a0a;
+  --studio-surface: #141414;
+  --studio-elevated: #1a1a1a;
+  --studio-border: #272727;
+  --studio-border-strong: #383838;
+  --studio-muted: #7a7a7a;
+  --studio-text: #f5f5f5;
+  --studio-accent: #ffffff;
+  --studio-accent-dim: #d4d4d4;
+  --studio-card-preview: #070707;
+  --studio-glow: rgba(255, 255, 255, 0.05);
+  --studio-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -12px rgba(0, 0, 0, 0.7);
+  --studio-shadow-lg: 0 24px 60px -20px rgba(0, 0, 0, 0.85);
+}
+
+html[data-theme='light'] {
+  --studio-bg: #fbfbfa;
+  --studio-surface: #ffffff;
+  --studio-elevated: #ffffff;
+  --studio-border: #e6e6e4;
+  --studio-border-strong: #d4d4d2;
+  --studio-muted: #525252;
+  --studio-text: #0a0a0a;
+  --studio-accent: #0a0a0a;
+  --studio-accent-dim: #404040;
+  --studio-card-preview: #f4f4f3;
+  --studio-glow: rgba(10, 10, 10, 0.04);
+  --studio-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 10px 30px -18px rgba(0, 0, 0, 0.22);
+  --studio-shadow-lg: 0 30px 60px -24px rgba(0, 0, 0, 0.26);
+}
+
+@theme inline {
+  --color-studio-bg: var(--studio-bg);
+  --color-studio-surface: var(--studio-surface);
+  --color-studio-elevated: var(--studio-elevated);
+  --color-studio-border: var(--studio-border);
+  --color-studio-border-strong: var(--studio-border-strong);
+  --color-studio-muted: var(--studio-muted);
+  --color-studio-text: var(--studio-text);
+  --color-studio-accent: var(--studio-accent);
+  --color-studio-accent-dim: var(--studio-accent-dim);
+  --color-studio-card-preview: var(--studio-card-preview);
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --shadow-studio: var(--studio-shadow);
+  --shadow-studio-lg: var(--studio-shadow-lg);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--studio-bg);
+  color: var(--studio-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Ambient background: soft top glow + fine grid for depth */
+#root {
+  position: relative;
+  isolation: isolate;
+}
+
+#root::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 18% -10%, var(--studio-glow), transparent 60%),
+    radial-gradient(50rem 40rem at 110% 0%, var(--studio-glow), transparent 55%);
+}
+
+.works-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--studio-border-strong) transparent;
+}
+
+.works-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.works-scroll::-webkit-scrollbar-thumb {
+  background: var(--studio-border-strong);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+.works-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--studio-muted);
+  background-clip: padding-box;
+}
+
+/* Reusable card surface with hover lift */
+.card-surface {
+  background: var(--studio-surface);
+  border: 1px solid var(--studio-border);
+  box-shadow: var(--studio-shadow);
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-3px);
+  border-color: var(--studio-border-strong);
+  box-shadow: var(--studio-shadow-lg);
+}
+
+/* Staggered fade-up for panel content */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
