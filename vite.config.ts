@@ -4,6 +4,6 @@ import { defineConfig } from 'vite'
 
 // Use base: '/' if deploying to username.github.io (user site repo).
 export default defineConfig({
-  base: '/portfolio/',
+  base: '/Portfolio/',
   plugins: [react(), tailwindcss()],
 })
